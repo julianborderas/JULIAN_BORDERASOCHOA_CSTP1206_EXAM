@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{{url_for('static', filename='scripts/profile.js')}}"></script>
+        <title>Alpaca Dating</title>
+    </head>
+    <style>
+
+        main {
+            padding-left: 12vw;
+            padding-right: 8vw;
+        }
+
+        header {
+            margin-left: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+         .headerButton {
+            background-color:darkgray;
+            font-size: 1.5vw;
+            color: white;
+            height: 3vw;
+            width: 7vw;
+            border-radius: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+    
+        .cards__item {
+            display: flex;
+            background: lightgrey;
+            padding: 2vw;
+            margin: 4vw;
+            border-radius: 3vw;
+        }
+    
+        .profilePicture {
+            max-width: 13vw;
+            height: 13vw;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+    
+        .profilePicture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        .userInfo {
+            margin-left: 3vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+    
+    <body>
+        <header>
+            <div class="headerButton">
+                <a href="/">Home</a>
+            </div>
+            <h1>Alpaca Dating</h1>
+            <div class="headerButton">
+                <a href="/delete">Delete</a>
+            </div>
+            <div></div>
+        </header>
+        <main>
+            <div>
+                <div>
+                    <img src="../{{results['profilePicture']}}" />
+                </div>
+                <div>
+                    <h2>
+                        Age: {{results['age']}}
+                    </h2>
+                    <h2>Bio: </h2>
+                    <ul>
+                        {% for x in bio %}
+                        <li>
+                            {{x}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <h2>Hobbies: </h2>
+                    <ul>
+                        {% for x in hobbies %}
+                        <li>
+                            {{x}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+                </div>
+            </div>
+            <div id="hello-data" data-hello="{{contact}}">
+    
+            </div>
+            <button class="headerButton" onclick="hello()">
+                hello
+            </button>
+
+            <div class="headerButton" style="margin-left: 73%;">
+                <a href="/create">Create</a>
+            </div>
+        </main>
+    </body>
+    <script src="{{url_for('static', filename='scripts/profile.js')}}"></script>
+    
+    </html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{{url_for('static', filename='scripts/index.js')}}"></script>
+        <title>Alpaca Dating</title>
+    </head>
+    <style>
+
+        main {
+            padding-left: 12vw;
+            padding-right: 8vw;
+        }
+
+        .cardButton {
+            background-color:darkgray;
+            font-size: 1.5vw;
+            color: white;
+            height: 3vw;
+            border-radius: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .headerButton {
+            background-color:darkgray;
+            font-size: 1.5vw;
+            color: white;
+            height: 3vw;
+            width: 7vw;
+            border-radius: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .cards {
+            display: flex;
+
+            /* Put a card in the next row when previous cards take all width */
+            flex-wrap: wrap;
+
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        .cards__item {
+            /* There will be 4 cards per row */
+            flex-basis: 33%;
+            background-color:grey;
+            align-items: center;
+            text-align: center;
+            padding: 2vw;
+            margin: 4vw;
+            border-radius: 3vw;
+        }
+
+        .profilePicture {
+            border-radius: 100%;
+            overflow: hidden;
+        }
+
+        .profilePicture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .userInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+    <body>
+        <header>
+            <div class="headerButton">
+                {% if not age or age == 'None' %}
+                <a href="/u25">Age<=25</a>
+                {% endif %}
+                {% if sex == 'male' %}
+                <a href="/o25">Age>25</a>
+                {% endif %}
+            </div>
+            <h1>Alpaca Dating</h1>
+            <div class="headerButton">
+                <a id="searchButton" onclick="searchUser()">Search</a>
+            </div>
+        </header>
+        <main>
+            <div id="profileContainer" class="cards">
+                {% for x in results %}
+                <div class="cards__item">
+                    <div class="profilePicture"><img src="../static/assets/{{x['name']}} + '.png'" alt="profile pic" /></div>
+                    <div class="userInfo">
+                        <h2 class="userName">{{x['name']}}</h2>
+                        <h3 class="profileInfo">Age: {{x['age']}}</h3>
+                        <h3 class="profileInfo">Sex: {{x['sex']}}</h3>
+                        <div class="cardButton">
+                            <a href="/profile/{{x['name']}}">
+                                profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
+</html>
